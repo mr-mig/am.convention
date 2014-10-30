@@ -1,0 +1,11 @@
+{
+  "name": "am.convention",
+  "version": "1.0.0",
+  "description": "Helpers to work with conventions: names, types, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mr_Mig",
+  "license": "MIT"
+}
