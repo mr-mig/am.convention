@@ -5,6 +5,11 @@ module.exports = {
 		composite: 'composites',
 		screen: 'screens'
 	},
+	behaviourComponents: {
+		state: 'state',
+		channel: 'channel',
+		link: 'link'
+	},
 
 	prefix: conventionalPrefix,
 	composedName: composedName,
