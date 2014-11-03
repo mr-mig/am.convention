@@ -11,6 +11,10 @@ module.exports = {
 		link: 'link'
 	},
 
+  globalNames: {
+    channels: 'Channels'
+  },
+
 	prefix: conventionalPrefix,
 	composedName: composedName,
 	ngModuleName: moduleName
