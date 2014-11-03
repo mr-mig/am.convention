@@ -18,10 +18,10 @@ conventions.globalNames = {
 
 conventions.names = {
   element: composeName(firstLower),
-  state: composeName(firstLower, conventions.behaviourComponents.state),
+  state: composeName(firstUpper, conventions.behaviourComponents.state),
   composite: composeName(firstLower),
   screen: composeName(firstLower),
-  ngModule: composeName(firstLower, '.')
+  ngModule: ngModuleName
 };
 
 function firstUpper(string) {
@@ -32,14 +32,17 @@ function firstLower(string) {
   return string.charAt(0).toLowerCase() + string.substr(1);
 }
 
-function composeName(firstWordTransformer, component, separator) {
-  separator = separator || '';
+function composeName(firstWordTransformer, component) {
   firstWordTransformer = firstWordTransformer || firstLower;
   component = component || '';
 
   return function (entity) {
-    return [firstWordTransformer(entity), firstUpper(component)].join(separator);
+    return [firstWordTransformer(entity), firstUpper(component)].join('');
   };
+}
+
+function ngModuleName(entity, type){
+  return [entity.toLowerCase(), type.toLowerCase()].join('.');
 }
 
 module.exports = conventions;
