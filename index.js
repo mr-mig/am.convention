@@ -1,49 +1,45 @@
 'use strict';
-module.exports = {
-	structureComponents: {
-		element: 'elements',
-		composite: 'composites',
-		screen: 'screens'
-	},
-	behaviourComponents: {
-		state: 'state',
-		channel: 'channel',
-		link: 'link'
-	},
+var conventions = {};
 
-  globalNames: {
-    channels: 'Channels'
-  },
-
-	prefix: conventionalPrefix,
-	composedName: composedName,
-	ngModuleName: moduleName
+conventions.structureComponents = {
+  element: 'elements',
+  composite: 'composites',
+  screen: 'screens'
+};
+conventions.behaviourComponents = {
+  state: 'state',
+  channel: 'channel',
+  link: 'link'
 };
 
+conventions.globalNames = {
+  channels: 'Channels'
+};
 
-// turn project name into conventional prefix
-function conventionalPrefix(project) {
-	project = project || 'default';
-
-	return {
-		upper: firstUpper(project),
-		lower: firstLower(project)
-	};
-}
+conventions.names = {
+  element: composeName(firstLower),
+  state: composeName(firstLower, conventions.behaviourComponents.state),
+  composite: composeName(firstLower),
+  screen: composeName(firstLower),
+  ngModule: composeName(firstLower, '.')
+};
 
 function firstUpper(string) {
-	return string.charAt(0).toUpperCase() + string.substr(1);
+  return string.charAt(0).toUpperCase() + string.substr(1);
 }
 
 function firstLower(string) {
-	return string.charAt(0).toLowerCase() + string.substr(1);
+  return string.charAt(0).toLowerCase() + string.substr(1);
 }
 
-function composedName(prefix, entity, component) {
-	component = component || '';
-	return [prefix, firstUpper(entity), firstUpper(component)].join('');
+function composeName(firstWordTransformer, component, separator) {
+  separator = separator || '';
+  firstWordTransformer = firstWordTransformer || firstLower;
+  component = component || '';
+
+  return function (entity) {
+    return [firstWordTransformer(entity), firstUpper(component)].join(separator);
+  };
 }
 
-function moduleName(prefix, type, component) {
-	return [prefix, type, component].join('.');
-}
+module.exports = conventions;
